@@ -7,8 +7,6 @@ Use this role to install Jenkins and install/update plugins.
 
 ### Create a host file
 
-Following example make ansible aware of the Vagrant box reachable on localhost port 2222.
-
 ```bash
 $ vi ansible.host
 ```
