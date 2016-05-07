@@ -1,0 +1,18 @@
+---
+
+- name: List plugins
+  shell: "{{ jenkins_cli_cmd }} list-plugins | cut -f 1 -d ' '"
+  when: plugins is defined
+  register: plugins_installed
+  
+- name: Ensure jenkins running before requesting safe restart
+  service: name=jenkins state=started
+
+- name: Install/update plugins
+  shell: "{{ jenkins_cli_cmd }} install-plugin {{ item }}"
+  when: plugins_installed.changed and plugins_installed.stdout.find('{{ item }}') == -1
+  with_items: plugins
+  ignore_errors: yes
+  notify:
+    - 'Restart Jenkins'
+
