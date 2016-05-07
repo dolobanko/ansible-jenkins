@@ -15,7 +15,7 @@ with
 
 ```ini
 [jenkins]
-127.0.0.1 
+your-server-ip
 ```
 
 ```
@@ -35,4 +35,9 @@ First create a playbook including the jenkins role, naming it jenkins.yml.
 
 ```bash
 $ ansible-playbook -i ansible.host jenkins.yml
+```
+### To confirm installation, go to you-server-ip:8080 and put secret key:
+
+```bash
+$ cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
